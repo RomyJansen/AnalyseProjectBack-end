@@ -2,7 +2,13 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from starlette.middleware.cors import CORSMiddleware
 
+import Data.DatabaseConnector
+
 app = FastAPI()
+
+
+dbc = Data.DatabaseConnector
+
 
 # define a model to validate the request body
 class CellUpdate(BaseModel):
@@ -10,8 +16,9 @@ class CellUpdate(BaseModel):
     col: int
     role: str
 
+
 # define the game grid
-game_grid = [["empty" for _ in range(5)] for _ in range(5)]
+game_grid = [["empty" for _ in range(30)] for _ in range(30)]
 
 # configure CORS
 origins = [
@@ -26,6 +33,13 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.post("/db")
+async def get_items_from_database(id1: int = None):
+    print(str(id1))
+    return dbc.DatabaseConnector.connect(dbc.DatabaseConnector(), "select * from variabelen where nummer = " + str(id1))
+
 
 # handle POST requests to /update-cell
 @app.post("/update-cell")
