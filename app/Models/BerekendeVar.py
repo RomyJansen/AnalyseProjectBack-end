@@ -1,4 +1,4 @@
-from App.Models.Variabele import Variabele
+from app.Models.Variabele import Variabele
 
 
 class BerekendeVar(Variabele):
