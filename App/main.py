@@ -1,13 +1,17 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from pydantic import BaseModel
 from starlette.middleware.cors import CORSMiddleware
+import uvicorn
 
-import Data.DatabaseConnector
+from App.Data.DatabaseConnector import DatabaseConnector
+from App.Models.BerekendeVar import BerekendeVar
 
 app = FastAPI()
 
+dbc = DatabaseConnector()
 
-dbc = Data.DatabaseConnector
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
 
 
 # define a model to validate the request body
@@ -36,9 +40,8 @@ app.add_middleware(
 
 
 @app.post("/db")
-async def get_items_from_database(id1: int = None):
-    print(str(id1))
-    return dbc.DatabaseConnector.connect(dbc.DatabaseConnector(), "select * from variabelen where nummer = " + str(id1))
+async def get_items_from_database(request: Request):
+    return dbc.DatabaseConnector.connect(dbc.DatabaseConnector(), "select * from AlleVariabelen")
 
 
 # handle POST requests to /update-cell
@@ -46,3 +49,9 @@ async def get_items_from_database(id1: int = None):
 async def update_cell(cell: CellUpdate):
     game_grid[cell.row][cell.col] = cell.role
     return {"message": "Cell updated successfully"}
+
+
+@app.post("/db")
+async def updateBerekendeVar(newVar: BerekendeVar):
+    newVar.printValues()
+    return "all good!"

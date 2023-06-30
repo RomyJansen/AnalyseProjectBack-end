@@ -1,0 +1,4 @@
+
+class Berekenen:
+
+    def bereken

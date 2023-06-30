@@ -27,4 +27,4 @@ class DatabaseConnector:
 
 
 if __name__ == '__main__':
-    print(DatabaseConnector.connect(DatabaseConnector(), "Select * from variabelen"))
+    print(DatabaseConnector.connect(DatabaseConnector(), "Select * from AlleVariabelen"))
