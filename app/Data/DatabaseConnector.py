@@ -3,27 +3,27 @@ import mysql.connector
 
 class DatabaseConnector:
 
-    def connect(self, query: str):
+    def connect(self,):
         cnx = mysql.connector.connect(user='root',
                                       password='wachtwoord',
                                       host='localhost',
                                       database='Arnhem')
 
         # create a cursor object to execute queries
-        cursor = cnx.cursor()
+        # cursor = cnx.cursor()
+        #
+        # # execute a query
+        # query = query
+        # cursor.execute(query)
+        #
+        # # fetch the results
+        # results = cursor.fetchall()
+        #
+        # # close the cursor and connection
+        # cursor.close()
+        # cnx.close()
 
-        # execute a query
-        query = query
-        cursor.execute(query)
-
-        # fetch the results
-        results = cursor.fetchall()
-
-        # close the cursor and connection
-        cursor.close()
-        cnx.close()
-
-        return results
+        return cnx
 
 
 if __name__ == '__main__':

@@ -6,7 +6,8 @@ class Variabele(BaseModel):
     naam: str
     waarde: int
 
-    def __init__(self, id: int, naam: str, waarde: int):
-        self.id = id
-        self.naam = naam
-        self.waarde = waarde
+    # def __init__(self, id: int, naam: str, waarde: int):
+    #     super().__init__()
+    #     self.id = id
+    #     self.naam = naam
+    #     self.waarde = waarde
