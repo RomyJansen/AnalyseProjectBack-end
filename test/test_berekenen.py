@@ -1,7 +1,7 @@
 import unittest
 from unittest import mock
 
-from app.Analyse.berekenen import Berekenen
+from app.AnalyseComponent.berekenen import Berekenen
 
 
 class TestBerekenen(unittest.TestCase):

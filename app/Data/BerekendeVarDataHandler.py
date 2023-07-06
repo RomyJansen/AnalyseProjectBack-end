@@ -14,6 +14,16 @@ class BerekendeVarDataHandler:
         results = self._data_handler.get_items_from_db(query, (id,))
         return self._put_result_berekende_var_into_object(results[0])
 
+    def get_all_bv_from_db(self):
+        query = "SELECT * FROM BerekendeVariabelen"
+        results = self._data_handler.get_items_from_db(query, ())
+        bv_list = []
+        for row in results:
+            bv_list.append(self._put_result_berekende_var_into_object(row))
+
+        return bv_list
+
+
     def _put_result_berekende_var_into_object(self, result: []):
         varInfo = BerekendeVar(id=1, naam="test", waarde=0, var1Id=0, var2Id=0, object1Id=0, object2Id=0, operator="+",
                                objectBerekening=False,)

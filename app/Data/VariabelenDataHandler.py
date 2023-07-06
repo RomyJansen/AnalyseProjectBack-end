@@ -16,6 +16,15 @@ class VariabelenDataHandler:
         results = self._data_handler.get_items_from_db(query, (id,))
         return self._put_result_var_into_object(results[0])
 
+    def get_start_variabelen(self):
+        query = "SELECT * FROM StartVariabelen"
+        results = self._data_handler.get_items_from_db(query, ())
+        varList = []
+        for row in results:
+            varList.append(self._put_result_var_into_object(row))
+
+        return varList
+
     def _put_result_var_into_object(self, result: []):
         varInfo = Variabele(id=1, naam="test", waarde=0)
 
