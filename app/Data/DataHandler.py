@@ -1,4 +1,4 @@
-from app.Data.DatabaseConnector import DatabaseConnector
+from app.Data.util.DatabaseConnector import DatabaseConnector
 
 
 class DataHandler:

@@ -1,6 +1,6 @@
 import unittest
 
-from app.Data.BerekendeVarDataHandler import BerekendeVarDataHandler
+from app.Data.ModelHandlers.BerekendeVarDataHandler import BerekendeVarDataHandler
 
 
 class TestBerekendeVarDataHandler(unittest.TestCase):

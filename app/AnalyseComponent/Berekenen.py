@@ -1,5 +1,5 @@
-from app.Data.BerekendeVarDataHandler import BerekendeVarDataHandler
-from app.Data.VariabelenDataHandler import VariabelenDataHandler
+from app.Data.ModelHandlers.BerekendeVarDataHandler import BerekendeVarDataHandler
+from app.Data.ModelHandlers.VariabelenDataHandler import VariabelenDataHandler
 from app.Models.BerekendeVar import BerekendeVar
 
 

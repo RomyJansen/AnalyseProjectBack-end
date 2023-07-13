@@ -31,6 +31,8 @@ CREATE TABLE Object(
 id int primary key,
 naam varchar(50),
 objecttype int,
+locatieX int,
+locatieY int,
 foreign key (objecttype) references Objecttypes(id) 
 );
 
@@ -104,10 +106,10 @@ INSERT INTO Objecttypes (id, naam) VALUES
 (2, 'MagicType'),
 (3, 'TreasureType');
 
-INSERT INTO Object (id, naam, objecttype) VALUES
-(1, 'Dragon1', 1),
-(2, 'MagicObject2', 2),
-(3, 'TreasureChest', 3);
+INSERT INTO Object (id, naam, objecttype, locatieX, locatieY) VALUES
+(1, 'Dragon1', 1, 20, 50),
+(2, 'MagicObject2', 2, 500, 80),
+(3, 'TreasureChest', 3, 50, 50);
 
 INSERT INTO Objectvariabelen (varId, objectId, naam, waarde) VALUES
 (1, 1, 'DragonVar1', 50),

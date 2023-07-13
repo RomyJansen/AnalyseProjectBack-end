@@ -1,8 +1,8 @@
 from typing import Union
-from app.Data.DatabaseConnector import DatabaseConnector
+from app.Data.util.DatabaseConnector import DatabaseConnector
 from app.Models.BerekendeVar import BerekendeVar
 
-from fastapi import FastAPI, APIRouter, Request
+from fastapi import APIRouter, Request
 
 router: APIRouter = APIRouter()
 dbc = DatabaseConnector()

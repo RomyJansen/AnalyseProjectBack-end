@@ -1,6 +1,6 @@
 import unittest
 
-from app.Data.VariabelenDataHandler import VariabelenDataHandler
+from app.Data.ModelHandlers.VariabelenDataHandler import VariabelenDataHandler
 
 
 class TestVariabelenDataHandler(unittest.TestCase):

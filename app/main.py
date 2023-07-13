@@ -1,13 +1,9 @@
-from fastapi import FastAPI, Request
-from pydantic import BaseModel
+from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 import uvicorn
 from starlette.responses import RedirectResponse
 
 from app.APIRouters.VariabelenRouter import variabelen_router
-from app.Data.DatabaseConnector import DatabaseConnector
-from app.Models.BerekendeVar import BerekendeVar
-from app.APIRouters.RESTtest import router
 
 App = FastAPI()
 
