@@ -59,7 +59,7 @@ berVarId int null,
 afstandVarId int null,
 standaardVarId int null,
 objectLink int null,
-foreign key (typeId) references verTypes(id),
+foreign key (typeId) references varTypes(id),
 foreign key (berVarId) references berekendeVariabelen(id),
 foreign key (afstandVarId) references afstandVariabelen(id),
 foreign key (standaardVarId) references standaardVariabelen(id),
@@ -73,6 +73,15 @@ jaar int,
 waarde int,
 primary key (id, jaar),
 foreign key (id) references allevariabelen(id)
+);
+
+CREATE TABLE regels(
+id int primary key,
+naam varchar(50),
+waarde int,
+vergelijkingOperator varchar(2),
+varId int,
+foreign key (varId) references alleVariabelen(id)
 );
 
 ALTER TABLE berekendeVariabelen

@@ -17,7 +17,7 @@ class VariabelenDataHandler:
         return self._put_result_var_into_object(results[0])
 
     def get_start_variabelen(self):
-        query = "SELECT * FROM StartVariabelen"
+        query = "SELECT * FROM StandaardVariabelen"
         results = self._data_handler.get_items_from_db(query, ())
         varList = []
         for row in results:

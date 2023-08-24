@@ -9,7 +9,7 @@ class ObjectDataHandler:
         self._data_handler = DataHandler()
 
     def get_objects_from_db(self):
-        query = "SELECT * FROM Object"
+        query = "SELECT * FROM Objecten"
         results = self._data_handler.get_items_from_db(query, ())
         objects = []
         for result in results:
