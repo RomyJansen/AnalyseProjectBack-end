@@ -6,7 +6,3 @@ class AfstandVar(Variabele):
     doelObjectType: int
     results: list
 
-
-class ObjectType:
-    id: int
-    naam: str

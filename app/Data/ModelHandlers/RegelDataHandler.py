@@ -9,7 +9,7 @@ class RegelDataHandler:
         self._data_handler = DataHandler()
 
     def get_objects_from_db(self):
-        query = "SELECT * FROM Regels"
+        query = "SELECT * FROM regels"
         results = self._data_handler.get_items_from_db(query, ())
         regels = []
         for result in results:
@@ -25,5 +25,6 @@ class RegelDataHandler:
         regelInfo.waarde = result[2]
         regelInfo.vergelijkingOperator = result[3]
         regelInfo.varId = result[4]
+        regelInfo.results = []
 
         return regelInfo

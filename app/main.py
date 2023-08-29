@@ -3,7 +3,8 @@ from starlette.middleware.cors import CORSMiddleware
 import uvicorn
 from starlette.responses import RedirectResponse
 
-from app.APIRouters.VariabelenRouter import variabelen_router
+from app.Presentation.GebeurtenissenRouter import gebeurtenissen_router
+from app.Presentation.VariabelenRouter import variabelen_router
 
 App = FastAPI()
 
@@ -23,6 +24,7 @@ App.add_middleware(
 )
 
 App.include_router(variabelen_router)
+App.include_router(gebeurtenissen_router)
 
 @App.get('/')
 def redirect_to_docs():

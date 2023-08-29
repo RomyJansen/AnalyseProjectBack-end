@@ -1,7 +1,6 @@
 import unittest
-from unittest import mock
 
-from app.AnalyseComponent.AfstandBerekenen import AfstandBerekenen
+from app.Business.AnalyseComponent.AfstandBerekenen import AfstandBerekenen
 
 
 class TestAfstandBerekenen(unittest.TestCase):

@@ -1,4 +1,4 @@
-from app.AnalyseComponent.AfstandBerekenen import AfstandBerekenen
+from app.Business.AnalyseComponent.AfstandBerekenen import AfstandBerekenen
 from app.Data.ModelHandlers.BerekendeVarDataHandler import BerekendeVarDataHandler
 from app.Data.DataHandler import DataHandler
 from app.Data.ModelHandlers.GebeurtenisDataHandler import GebeurtenisDataHandler

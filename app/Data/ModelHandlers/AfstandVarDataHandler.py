@@ -1,5 +1,5 @@
 from app.Data.DataHandler import DataHandler
-from app.Models.AfstandVar import AfstandVar, ObjectType
+from app.Models.AfstandVar import AfstandVar
 
 from app.Models.BerekendeVar import BerekendeVar
 

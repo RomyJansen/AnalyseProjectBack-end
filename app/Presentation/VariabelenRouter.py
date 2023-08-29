@@ -1,17 +1,20 @@
-from app.AnalyseComponent.AfstandBerekenen import AfstandBerekenen
-from app.AnalyseComponent.BerVarBerekenen import Berekenen
-from app.AnalyseComponent.Controle import Controle
+from app.Business.AnalyseComponent.AfstandBerekenen import AfstandBerekenen
+from app.Business.AnalyseComponent.BerVarBerekenen import BerVarBerekenen
+from app.Business.AnalyseComponent.Controle import Controle
 from app.Data.ModelHandlers.BerekendeVarDataHandler import BerekendeVarDataHandler
 from app.Data.ModelHandlers.ScenarioDataHandler import ScenarioDataHandler
 
 from fastapi import APIRouter
 
-variabelen_router: APIRouter = APIRouter()
+from app.Business.WijzigingsComponent.GebeurtenisController import GebeurtenisController
+
+variabelen_router: APIRouter = APIRouter( prefix="/variabelen")
 bv_data_handler: BerekendeVarDataHandler = BerekendeVarDataHandler()
-bv_berekenen: Berekenen = Berekenen()
+bv_berekenen: BerVarBerekenen = BerVarBerekenen()
 scenario_data_handler: ScenarioDataHandler = ScenarioDataHandler()
 controle: Controle = Controle()
 afstandBerekenen = AfstandBerekenen()
+gebeurtenis_controller = GebeurtenisController()
 
 @variabelen_router.get('/bv/{id}')
 def get_berekende_variabele_from_id(id: int):
@@ -32,3 +35,4 @@ def get_regel_results():
 @variabelen_router.get("/afstanden")
 def get_alle_afstanden():
     return afstandBerekenen.berekenAlleAfstanden()
+

@@ -1,11 +1,19 @@
+from typing import List
+
 from app.Data.ModelHandlers.BerekendeVarDataHandler import BerekendeVarDataHandler
 from app.Data.ModelHandlers.VariabelenDataHandler import VariabelenDataHandler
 from app.Models.BerekendeVar import BerekendeVar
 
 
-class Berekenen:
+class BerVarBerekenen:
     berekende_var_data_handler = BerekendeVarDataHandler()
     variabelen_data_handler = VariabelenDataHandler()
+
+    def bereken_alle_berekende_var(self):
+        berekende_vars: List[BerekendeVar] = self.berekende_var_data_handler.get_all_bv_from_db()
+        for var in berekende_vars:
+            var.results.append(self.bereken_berekende_var(var.id))
+        return berekende_vars
 
     def bereken_berekende_var(self, varId):
         nieuweWaarde: int

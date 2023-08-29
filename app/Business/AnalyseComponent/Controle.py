@@ -15,10 +15,9 @@ class Controle:
     # rekening houdem met regels rondom gebeurtenissen!
 
     def controleer_alle_regels(self):
-        results = []
         for regel in self._regels:
-            results.append({regel.id, self._controleer_regel(regel)})
-        return results
+            regel.results.append({regel.id, self._controleer_regel(regel)})
+        return self._regels
 
     def _controleer_regel(self, regel):
         waarde1 = self._var_data_handler.get_variabele_waarde_from_id(regel.varId)

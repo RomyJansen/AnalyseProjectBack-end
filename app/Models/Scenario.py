@@ -9,7 +9,7 @@ from app.Models.Variabele import Variabele
 
 class Scenario(BaseModel):
     id: int = 1
-    naam: str = "Scenario"
+    naam: str = "WijzigingsComponent"
     standaard_variabelen: List[Variabele] = []
     berekende_variabelen: List[BerekendeVar] = []
     afstands_variabelen: List[AfstandVar] = []

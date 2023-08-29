@@ -10,6 +10,7 @@ class BerekendeVar(Variabele):
     object2Id: int
     objectBerekening: bool
     operator: str
+    results: list
 
     # def printValues(self):
     #     printString = "id: " + str(id)

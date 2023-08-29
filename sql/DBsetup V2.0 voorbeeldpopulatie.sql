@@ -22,7 +22,8 @@ values (1, "afstand tot park", 1, 2),
 
 INSERT INTO allevariabelen
 values(1, 2, null, 1, null, 1),
-(2, 2, null, 2, null, 2);
+(2, 2, null, 2, null, 2),
+(3, 2, null, 3, null, 3);
 
 INSERT INTO regels
 values (1, "park dichtbij", 190, "=>", 1),

@@ -7,3 +7,4 @@ class Regel(BaseModel):
     waarde: int = 0
     vergelijkingOperator: str = "=="
     varId: int = 0
+    results: list = []

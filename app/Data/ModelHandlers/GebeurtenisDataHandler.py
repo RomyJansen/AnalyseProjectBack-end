@@ -22,8 +22,11 @@ class GebeurtenisDataHandler:
 
         gebeurtenisInfo.id = result[0]
         gebeurtenisInfo.naam = result[1]
-        gebeurtenisInfo.varId = result[2]
-        gebeurtenisInfo.jaar = result[3]
-        gebeurtenisInfo.waarde = result[4]
+        gebeurtenisInfo.jaar = result[2]
+        gebeurtenisInfo.waarde = result[3]
 
         return gebeurtenisInfo
+
+    def add_gebeurtenis_to_db(self, gebeurtenis: Gebeurtenis):
+        query = "INSERT INTO gebeurtenissen (id, naam, jaar, waarde) VALUE (%s, %s, %s , %s)"
+        self._data_handler.add_item_to_db(query, (gebeurtenis.id, gebeurtenis.naam, gebeurtenis.jaar, gebeurtenis.waarde))

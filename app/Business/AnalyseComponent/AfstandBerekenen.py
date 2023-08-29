@@ -2,7 +2,7 @@ import math
 
 from app.Data.ModelHandlers.AfstandVarDataHandler import AfstandVarDataHandler
 from app.Data.ModelHandlers.ObjectDataHandler import ObjectDataHandler
-from app.Models.AfstandVar import AfstandVar, ObjectType
+from app.Models.AfstandVar import AfstandVar
 from app.Models.Object import Object
 from app.Models.Variabele import Variabele
 
