@@ -84,6 +84,19 @@ varId int,
 foreign key (varId) references alleVariabelen(id)
 );
 
+CREATE TABLE objectGebeurtenissen(
+id int,
+naam varchar(30),
+jaar int,
+locatieX int,
+locatieY int,
+primary key(id, jaar));
+
+CREATE TABLE scenario(
+naam varchar(30) primary key,
+startjaar int, 
+eindjaar int);
+
 ALTER TABLE berekendeVariabelen
 ADD foreign key (var1Id)  references gebeurtenissen(id),
 ADD foreign key (var2Id) references gebeurtenissen(id);
