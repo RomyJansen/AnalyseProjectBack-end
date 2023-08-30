@@ -16,3 +16,4 @@ class GebeurtenisController():
         resultaten = self.analyse_core.analyse_uitvoeren()
 
         return resultaten
+
