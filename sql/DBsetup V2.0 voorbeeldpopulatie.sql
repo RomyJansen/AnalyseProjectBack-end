@@ -22,10 +22,10 @@ values (1, "afstand tot park", 1, 2, 2023),
 (3, "park tot park", 3, 2, 2023),
 (3, "park tot park", 3, 1, 2025);
 
-INSERT INTO allevariabelen
-values(1, 2, null, 1, null, 1),
-(2, 2, null, 2, null, 2),
-(3, 2, null, 3, null, 3);
+-- INSERT INTO allevariabelen
+-- values(1, 2, null, 1, null, 1),
+-- (2, 2, null, 2, null, 2),
+-- (3, 2, null, 3, null, 3);
 
 INSERT INTO regels
 values (1, "park dichtbij", 190, "=>", 1),

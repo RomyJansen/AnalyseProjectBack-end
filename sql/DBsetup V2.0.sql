@@ -59,7 +59,7 @@ foreign key (objectLink) references objecten(id)
 );
 
 CREATE TABLE alleVariabelen(
-id int primary key,
+id int primary key auto_increment,
 typeId int,
 berVarId int null,
 afstandVarId int null,
@@ -106,3 +106,59 @@ eindjaar int);
 ALTER TABLE berekendeVariabelen
 ADD foreign key (var1Id)  references gebeurtenissen(id),
 ADD foreign key (var2Id) references gebeurtenissen(id);
+
+DELIMITER //
+CREATE TRIGGER add_afstandVar_to_allevariabelen
+after insert ON afstandvariabelen
+FOR EACH ROW
+BEGIN
+	IF(new.id NOT IN (select afstandVarId from alleVariabelen))
+    THEN
+		INSERT INTO alleVariabelen(typeId, afstandVarId, objectLink)
+		values(2, new.id, new.objectLink);
+	END IF;
+END;
+//
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER add_berekendeVar_to_allevariabelen
+after insert ON afstandvariabelen
+FOR EACH ROW
+BEGIN
+	IF(new.id NOT IN (select berVarId from alleVariabelen))
+    THEN
+		INSERT INTO alleVariabelen(typeId, berVarId, objectLink)
+		values(3, new.id, new.objectLink);
+	END IF;
+END;
+//
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER add_standaardVar_to_allevariabelen
+after insert ON afstandvariabelen
+FOR EACH ROW
+BEGIN
+	IF(new.id NOT IN (select standaardVarId from alleVariabelen))
+    THEN
+		INSERT INTO alleVariabelen(typeId, standaardVarId, objectLink)
+		values(1, new.id, new.objectLink);
+	END IF;
+END;
+//
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER add_new_value_from_gebeurtenis_to_var_table
+after insert ON gebeurtenissen
+FOR EACH ROW
+BEGIN
+	IF EXISTS (SELECT 1 FROM alleVariabelen WHERE new.varId = id AND typeId = 2)
+    THEN
+		INSERT INTO afstandVariabelen 
+        values((select id, naam, objectLink from afstandvariabelen where id = new.id),new.waarde, new.jaar);
+	END IF;
+END;
+//
+DELIMITER ;

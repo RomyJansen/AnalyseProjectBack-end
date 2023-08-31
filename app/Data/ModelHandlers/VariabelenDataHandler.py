@@ -26,7 +26,7 @@ class VariabelenDataHandler:
         return varList
 
     def _put_result_var_into_object(self, result: []):
-        varInfo = Variabele(id=1, naam="test", waarde=0)
+        varInfo = Variabele(id=1, naam="test", waarde=0, jaar=0)
 
         varInfo.id = result[0]
         varInfo.waarde = result[1]
