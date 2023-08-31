@@ -8,6 +8,15 @@ class ObjectDataHandler:
     def __init__(self):
         self._data_handler = DataHandler()
 
+    def get_all_items_from_year(self, jaar: int):
+        query = "SELECT * FROM objecten WHERE (id, jaar) IN (SELECT id, MAX(jaar) as jaar FROM objecten WHERE jaar < %s group by id)"
+        results = self._data_handler.get_items_from_db(query, (jaar,))
+        bv_list = []
+        for row in results:
+            bv_list.append(self._put_result_into_object(row))
+
+        return bv_list
+
     def get_objects_from_db(self):
         query = "SELECT * FROM Objecten"
         results = self._data_handler.get_items_from_db(query, ())
@@ -27,3 +36,7 @@ class ObjectDataHandler:
         objectInfo.locatieY = result[4]
 
         return objectInfo
+
+if __name__ == '__main__':
+    handler = ObjectDataHandler()
+    print(handler.get_all_items_from_year(2028))

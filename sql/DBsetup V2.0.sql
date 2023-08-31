@@ -15,29 +15,35 @@ naam varchar(30)
 );
 
 CREATE TABLE objecten(
-id int primary key,
+id int,
 naam varchar(50),
 objectType int,
 locatieX int,
 locatieY int,
 grootteX int,
 grootteY int,
+jaar int,
+primary key(id, jaar),
 foreign key (objectType) references objectTypes(id)
 );
 
 CREATE TABLE standaardVariabelen(
-id int primary key,
+id int,
 naam varchar(30),
 objectLink int null,
-beginwaarde int,
+waarde int,
+jaar int,
+primary key (id, jaar),
 foreign key (objectLink) references objecten(id)
 );
 
 CREATE TABLE afstandVariabelen(
-id int primary key,
+id int,
 naam varchar(30),
 objectLink int,
 doelObjectType int,
+jaar int,
+primary key (id, jaar),
 foreign key (objectLink) references objecten(id),
 foreign key (doelObjectType) references objectTypes(id)
 );

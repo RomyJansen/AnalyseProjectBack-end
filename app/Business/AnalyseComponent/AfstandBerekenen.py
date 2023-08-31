@@ -19,6 +19,13 @@ class AfstandBerekenen:
             item.results = self.bereken_afstand_voor_item(item, objects)
         return varResults
 
+    def bereken_alle_afstanden_voor_jaar(self, jaar):
+        varResults: list = self.afstandVarDataHandler.get_all_items_from_year(jaar)
+        objects: list = self.objectDataHandler.get_all_items_from_year(jaar)
+        for item in varResults:
+            item.results = self.bereken_afstand_voor_item(item, objects)
+        return varResults
+
     def bereken_afstand_voor_item(self, item: AfstandVar, objects):
         results: list = []
         object: Object = self._find_specific_object(objects, item.objectLink)
@@ -28,7 +35,7 @@ class AfstandBerekenen:
                 possibleObjects.append(o)
 
         for po in possibleObjects:
-            results.append(Variabele(id=po.id, naam=po.naam, waarde=self._bereken_afstand(object.locatieX, object.locatieY, po.locatieX, po.locatieY)))
+            results.append(Variabele(id=po.id, naam=po.naam, waarde=self._bereken_afstand(object.locatieX, object.locatieY, po.locatieX, po.locatieY), jaar=0))
 
         return results
 

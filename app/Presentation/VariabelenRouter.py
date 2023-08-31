@@ -36,3 +36,8 @@ def get_regel_results():
 def get_alle_afstanden():
     return afstandBerekenen.berekenAlleAfstanden()
 
+@variabelen_router.get("/afstanden/jaar")
+def get_alle_afstanden_voor_jaar(jaar: int):
+    return afstandBerekenen.bereken_alle_afstanden_voor_jaar(jaar)
+
+
