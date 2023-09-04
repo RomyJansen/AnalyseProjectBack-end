@@ -1,30 +1,17 @@
+import configparser
+
 import mysql.connector
 
 
 class DatabaseConnector:
 
-    def connect(self,):
-        cnx = mysql.connector.connect(user='root',
-                                      password='wachtwoord',
-                                      host='localhost',
-                                      database='Arnhem')
+    def connect(self, ):
+        config = configparser.ConfigParser()
 
-        # create a cursor object to execute queries
-        # cursor = cnx.cursor()
-        #
-        # # execute a query
-        # query = query
-        # cursor.execute(query)
-        #
-        # # fetch the results
-        # results = cursor.fetchall()
-        #
-        # # close the cursor and connection
-        # cursor.close()
-        # cnx.close()
+        config.read('config.ini')
+        cnx = mysql.connector.connect(user=config.get('DatabaseSection', 'database.user'),
+                                      password=config.get('DatabaseSection', 'database.password'),
+                                      host=config.get('DatabaseSection', 'database.host'),
+                                      database=config.get('DatabaseSection', 'database.dbname'))
 
         return cnx
-
-
-if __name__ == '__main__':
-    print(DatabaseConnector.connect(DatabaseConnector(), "Select * from AlleVariabelen"))
