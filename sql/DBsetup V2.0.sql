@@ -154,11 +154,27 @@ CREATE TRIGGER add_new_value_from_gebeurtenis_to_var_table
 after insert ON gebeurtenissen
 FOR EACH ROW
 BEGIN
-	IF EXISTS (SELECT 1 FROM alleVariabelen WHERE new.varId = id AND typeId = 2)
+	IF EXISTS (SELECT 1 FROM alleVariabelen WHERE new.id = id AND typeId = 2)
     THEN
 		INSERT INTO afstandVariabelen 
-        values((select id, naam, objectLink from afstandvariabelen where id = new.id),new.waarde, new.jaar);
-	END IF;
+        values(
+        (select afstandVarId from alleVariabelen WHERE id = new.id), 
+        (select naam from afstandvariabelen af join allevariabelen av where av.afstandVarId = af.id and av.id = new.id),
+        (select objectLink from alleVariabelen WHERE id =  new.id),
+        new.waarde, 
+        new.jaar);
+	ELSE IF EXISTS (SELECT 1 FROM allevariabelen WHERE new.id AND typeId = 1)
+	THEN
+		INSERT INTO standaardvariabelen
+		values(
+		(select standaardVarId from alleVariabelen WHERE id = new.id),
+		(select naam from standaardvariabelen sv join allevariabelen av where av.standaardVarId = sv.id and av.id = new.id),
+		(select objectLink from alleVariabelen WHERE id =  new.id),
+		new.waarde, 
+		new.jaar
+		);
+	END IF; /* end first else if */
+	END IF; /* end first if */
 END;
 //
 DELIMITER ;

@@ -8,7 +8,6 @@ from app.Models.Variabele import Variabele
 
 
 class AfstandBerekenen:
-
     afstandVarDataHandler = AfstandVarDataHandler()
     objectDataHandler = ObjectDataHandler()
 
@@ -35,20 +34,19 @@ class AfstandBerekenen:
                 possibleObjects.append(o)
 
         for po in possibleObjects:
-            results.append(Variabele(id=po.id, naam=po.naam, waarde=self._bereken_afstand(object.locatieX, object.locatieY, po.locatieX, po.locatieY), jaar=0))
+            results.append(Variabele(id=po.id, naam=po.naam,
+                                     waarde=self._bereken_afstand(object.locatieX, object.locatieY, po.locatieX,
+                                                                  po.locatieY), jaar=0))
 
         return results
 
     def _find_specific_object(self, objects: list, id: int):
-        for o in objects:
-            if o.id == id:
-                return o
-
-    # def _find_specific_objecttype(self, objects: list[ObjectType], id: int):
-    #     for o in objects:
-    #         if o.id == id:
-    #             return o
-
+        try:
+            for o in objects:
+                if o.id == id:
+                    return o
+        except TypeError as e:
+            raise(TypeError, "list of objects is empty!")
 
     def _bereken_afstand(self, x1, y1, x2, y2):
         return math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)

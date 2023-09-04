@@ -11,7 +11,7 @@ class AfstandVarDataHandler:
         self._data_handler = DataHandler()
 
     def get_all_items_from_year(self, jaar: int):
-        query = "SELECT * FROM afstandvariabelen WHERE (id, jaar) IN (SELECT id, MAX(jaar) as jaar FROM afstandvariabelen WHERE jaar < %s group by ID)"
+        query = "SELECT * FROM afstandvariabelen WHERE (id, jaar) IN (SELECT id, MAX(jaar) as jaar FROM afstandvariabelen WHERE jaar <= %s group by ID)"
         results = self._data_handler.get_items_from_db(query, (jaar,))
         bv_list = []
         for row in results:
