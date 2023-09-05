@@ -19,6 +19,11 @@ class TestAfstandBerekenen(TestCase):
     def test_bereken_afstand_voor_item_returns_correct_results(self, mock__find_specific_object, mock__bereken_afstand):
         self.assertEqual(self.sut.bereken_afstand_voor_item(self.testAfstandVar, self.testObjectList).pop().naam, self.testObject.naam)
 
+    @mock.patch.object(AfstandBerekenen, '_find_specific_object', return_value=testObject)
+    @mock.patch.object(AfstandBerekenen, '_bereken_afstand', return_value=0)
+    def test_bereken_afstand_voor_item_returns_empty_list(self, mock__find_specific_object, mock__bereken_afstand):
+        self.assertEqual(self.sut.bereken_afstand_voor_item(self.testAfstandVar, []), [])
+
     def test_find_specific_object_returns_correct_object(self):
         self.assertEqual(self.sut._find_specific_object(self.testObjectList, self.testObject.id).naam, self.testObject.naam)
 
