@@ -28,11 +28,11 @@ class ScenarioDataHandler:
 
     def get_scenario_from_db(self):
         scenario = Scenario()
-        scenario.standaard_variabelen = self._var_data_handler.get_start_variabelen()
-        scenario.berekende_variabelen = self._bv_data_handler.get_all_bv_from_db()
-        scenario.objecten = self._object_data_handler.get_objects_from_db()
+        scenario.standaard_variabelen = self._var_data_handler.get_all_from_db()
+        scenario.berekende_variabelen = self._bv_data_handler.get_all_from_db()
+        scenario.objecten = self._object_data_handler.get_all_from_db()
         scenario.afstands_variabelen = self._afstand_berekenen.berekenAlleAfstanden()
         scenario.gebeurtenissen = self._gebeurtenis_data_handler.get_objects_from_db()
-        scenario.regels = self._regel_data_handler.get_objects_from_db()
+        scenario.regels = self._regel_data_handler.get_all_from_db()
 
         return scenario

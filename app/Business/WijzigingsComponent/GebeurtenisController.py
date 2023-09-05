@@ -1,10 +1,11 @@
 from app.Business.AnalyseComponent.AnalyseCore import AnalyseCore
+from app.Business.IModelDataHandler import IModelDataHandler
 from app.Data.ModelHandlers.GebeurtenisDataHandler import GebeurtenisDataHandler
 from app.Models.Gebeurtenis import Gebeurtenis
 
 
 class GebeurtenisController():
-    gebeurtenis_data_handler: GebeurtenisDataHandler
+    gebeurtenis_data_handler: IModelDataHandler
     analyse_core: AnalyseCore
 
     def __init__(self):

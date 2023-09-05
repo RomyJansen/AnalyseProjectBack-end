@@ -1,5 +1,6 @@
 import math
 
+from app.Business.IModelDataHandler import IModelDataHandler
 from app.Data.ModelHandlers.AfstandVarDataHandler import AfstandVarDataHandler
 from app.Data.ModelHandlers.ObjectDataHandler import ObjectDataHandler
 from app.Models.AfstandVar import AfstandVar
@@ -8,12 +9,12 @@ from app.Models.Variabele import Variabele
 
 
 class AfstandBerekenen:
-    afstandVarDataHandler = AfstandVarDataHandler()
-    objectDataHandler = ObjectDataHandler()
+    afstandVarDataHandler: IModelDataHandler = AfstandVarDataHandler()
+    objectDataHandler: IModelDataHandler = ObjectDataHandler()
 
     def berekenAlleAfstanden(self):
-        varResults: list = self.afstandVarDataHandler.get_all_bv_from_db()
-        objects: list = self.objectDataHandler.get_objects_from_db()
+        varResults: list = self.afstandVarDataHandler.get_all_from_db()
+        objects: list = self.objectDataHandler.get_all_from_db()
         for item in varResults:
             item.results = self.bereken_afstand_voor_item(item, objects)
         return varResults

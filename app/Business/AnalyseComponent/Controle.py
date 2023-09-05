@@ -10,7 +10,7 @@ class Controle:
     def __init__(self):
         self._var_data_handler = VariabelenDataHandler()
         self._regel_data_handler = RegelDataHandler()
-        self._regels = self._regel_data_handler.get_objects_from_db()
+        self._regels = self._regel_data_handler.get_all_from_db()
 
     # rekening houdem met regels rondom gebeurtenissen!
 

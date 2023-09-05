@@ -16,6 +16,6 @@ class TestVariabelenDataHandler(unittest.TestCase):
         self.assertEqual(True, True)
 
     def test_get_start_variabelen_haalt_startvariabelen_op(self):
-        print(self.sut.get_start_variabelen())
+        print(self.sut.get_all_from_db())
 
         self.assertEqual(True, True)

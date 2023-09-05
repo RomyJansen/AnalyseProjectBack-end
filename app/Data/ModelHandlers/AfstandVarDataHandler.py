@@ -1,10 +1,9 @@
 from app.Data.DataHandler import DataHandler
+from app.Business.IModelDataHandler import IModelDataHandler
 from app.Models.AfstandVar import AfstandVar
 
-from app.Models.BerekendeVar import BerekendeVar
 
-
-class AfstandVarDataHandler:
+class AfstandVarDataHandler(IModelDataHandler):
     _data_handler: DataHandler
 
     def __init__(self):
@@ -15,25 +14,25 @@ class AfstandVarDataHandler:
         results = self._data_handler.get_items_from_db(query, (jaar,))
         bv_list = []
         for row in results:
-            bv_list.append(self._put_result_berekende_var_into_object(row))
+            bv_list.append(self._put_result_into_object(row))
 
         return bv_list
 
     def get_item_from_id(self, id: int):
         query = "SELECT * FROM afstandVariabelen WHERE id = %s"
         results = self._data_handler.get_items_from_db(query, (id,))
-        return self._put_result_berekende_var_into_object(results[0])
+        return self._put_result_into_object(results[0])
 
-    def get_all_bv_from_db(self):
+    def get_all_from_db(self):
         query = "SELECT * FROM afstandVariabelen"
         results = self._data_handler.get_items_from_db(query, ())
         bv_list = []
         for row in results:
-            bv_list.append(self._put_result_berekende_var_into_object(row))
+            bv_list.append(self._put_result_into_object(row))
 
         return bv_list
 
-    def _put_result_berekende_var_into_object(self, result: []):
+    def _put_result_into_object(self, result: []):
         varInfo = AfstandVar(id=1, naam="test", waarde=0, objectLink=0, doelObjectType=0, results=[], jaar=0)
 
         varInfo.id = result[0]

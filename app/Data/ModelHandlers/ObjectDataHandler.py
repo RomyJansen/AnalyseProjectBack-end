@@ -1,8 +1,9 @@
 from app.Data.DataHandler import DataHandler
+from app.Business.IModelDataHandler import IModelDataHandler
 from app.Models.Object import Object
 
 
-class ObjectDataHandler:
+class ObjectDataHandler(IModelDataHandler):
     _data_handler: DataHandler
 
     def __init__(self):
@@ -11,13 +12,23 @@ class ObjectDataHandler:
     def get_all_items_from_year(self, jaar: int):
         query = "SELECT * FROM objecten WHERE (id, jaar) IN (SELECT id, MAX(jaar) as jaar FROM objecten WHERE jaar < %s group by id)"
         results = self._data_handler.get_items_from_db(query, (jaar,))
-        bv_list = []
+        obj_list = []
         for row in results:
-            bv_list.append(self._put_result_into_object(row))
+            obj_list.append(self._put_result_into_object(row))
 
-        return bv_list
+        return obj_list
 
-    def get_objects_from_db(self):
+    def get_item_from_id(self, id: int):
+        query = "SELECT * FROM objecten WHERE id = %s"
+        results = self._data_handler.get_items_from_db(query, (id,))
+        obj_list = []
+        for row in results:
+            obj_list.append(self._put_result_into_object(row))
+
+        return obj_list
+
+
+    def get_all_from_db(self):
         query = "SELECT * FROM Objecten"
         results = self._data_handler.get_items_from_db(query, ())
         objects = []

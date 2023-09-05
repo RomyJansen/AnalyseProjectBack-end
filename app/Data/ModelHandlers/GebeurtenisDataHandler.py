@@ -1,14 +1,25 @@
 from app.Data.DataHandler import DataHandler
+from app.Business.IModelDataHandler import IModelDataHandler
 from app.Models.Gebeurtenis import Gebeurtenis, ObjectGebeurtenis
 
 
-class GebeurtenisDataHandler:
+class GebeurtenisDataHandler(IModelDataHandler):
     _data_handler: DataHandler
 
     def __init__(self):
         self._data_handler = DataHandler()
 
-    def get_alle_gebeurtenissen(self):
+    def get_item_from_id(self, id: int):
+        for gebeurtenis in self.get_objects_from_db():
+            if gebeurtenis.id == id:
+                return gebeurtenis
+
+    def get_object_gebeurtenis_from_id(self, id: int):
+        for gebeurtenis in self.get_object_gebeurtenissen():
+            if gebeurtenis.id == id:
+                return gebeurtenis
+
+    def get_all_from_db(self):
         alle_gebeurtenissen: list = [self.get_objects_from_db(), self.get_object_gebeurtenissen()]
         return alle_gebeurtenissen
 
@@ -17,11 +28,11 @@ class GebeurtenisDataHandler:
         results = self._data_handler.get_items_from_db(query, ())
         gebeurtenissen = []
         for result in results:
-            gebeurtenissen.append(self._put_result_into_gebeurtenis(result))
+            gebeurtenissen.append(self._put_result_into_object(result))
 
         return gebeurtenissen
 
-    def _put_result_into_gebeurtenis(self, result):
+    def _put_result_into_object(self, result):
         gebeurtenis_info = Gebeurtenis()
 
         gebeurtenis_info.id = result[0]
@@ -41,7 +52,7 @@ class GebeurtenisDataHandler:
         results = self._data_handler.get_items_from_db(query, ())
         gebeurtenissen = []
         for result in results:
-            gebeurtenissen.append(self._put_result_into_gebeurtenis(result))
+            gebeurtenissen.append(self._put_result_into_object(result))
 
         return gebeurtenissen
 
