@@ -178,3 +178,21 @@ BEGIN
 END;
 //
 DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER add_new_value_from_objectgebeurtenis_to_object_table
+after insert ON objectgebeurtenissen
+FOR EACH ROW
+BEGIN
+	INSERT INTO objecten
+    values(new.id, 
+    (select o.naam from objecten o join objecten obj where o.id = obj.id and obj.id = new.id LIMIT 1),
+    (select o.objectType from objecten o join objecten obj where o.id = obj.id and obj.id = new.id LIMIT 1),
+    new.locatieX,
+    new.locatieY,
+    (select o.grootteX from objecten o join objecten obj where o.id = obj.id and obj.id = new.id LIMIT 1),
+    (select o.grootteY from objecten o join objecten obj where o.id = obj.id and obj.id = new.id LIMIT 1),
+    new.jaar);
+END;
+//
+DELIMITER ;

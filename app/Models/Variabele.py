@@ -7,8 +7,9 @@ class Variabele(BaseModel):
     waarde: int
     jaar: int
 
-    # def __init__(self, id: int, naam: str, waarde: int):
-    #     super().__init__()
-    #     self.id = id
-    #     self.naam = naam
-    #     self.waarde = waarde
+
+class VariabeleKoppeling(BaseModel):
+    id: int
+    typeId: int
+    varId: int
+    objectLink: int

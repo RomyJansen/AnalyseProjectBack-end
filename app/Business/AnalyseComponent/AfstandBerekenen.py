@@ -12,19 +12,27 @@ class AfstandBerekenen:
     afstandVarDataHandler: IModelDataHandler = AfstandVarDataHandler()
     objectDataHandler: IModelDataHandler = ObjectDataHandler()
 
-    def berekenAlleAfstanden(self):
+    def bereken_alle_afstanden(self):
         varResults: list = self.afstandVarDataHandler.get_all_from_db()
         objects: list = self.objectDataHandler.get_all_from_db()
-        for item in varResults:
-            item.results = self.bereken_afstand_voor_item(item, objects)
-        return varResults
+        try:
+            for item in varResults:
+                item.results = self.bereken_afstand_voor_item(item, objects)
+            return varResults
+        except TypeError as e:
+            raise (e, "Er zijn geen afstand variabelen in de database!")
+        # Deze errorHandling verplaatsen naar data layer!
 
     def bereken_alle_afstanden_voor_jaar(self, jaar):
         varResults: list = self.afstandVarDataHandler.get_all_items_from_year(jaar)
         objects: list = self.objectDataHandler.get_all_items_from_year(jaar)
-        for item in varResults:
-            item.results = self.bereken_afstand_voor_item(item, objects)
-        return varResults
+        try:
+            for item in varResults:
+                item.results = self.bereken_afstand_voor_item(item, objects)
+            return varResults
+        except TypeError as e:
+            raise (e, "Er zijn geen afstand variabelen in de database!")
+        # Deze errorHandling verplaatsen naar data layer!
 
     def bereken_afstand_voor_item(self, item: AfstandVar, objects):
         results: list = []
@@ -37,9 +45,24 @@ class AfstandBerekenen:
         for po in possibleObjects:
             results.append(Variabele(id=po.id, naam=po.naam,
                                      waarde=self._bereken_afstand(object.locatieX, object.locatieY, po.locatieX,
-                                                                  po.locatieY), jaar=0))
+                                                                  po.locatieY), jaar=po.jaar))
 
         return results
+
+    def get_laagste_afstand_van_var_uit_resultaat_voor_jaar(self, id: int, jaar: int):
+        results = self.bereken_alle_afstanden_voor_jaar(jaar)
+        for var in results:
+            if var.id == id:
+                return self._find_lowest_distance(var)
+
+    def _find_lowest_distance(self, afstand_var: AfstandVar):
+        lowest: int = 0
+        for var in afstand_var.results:
+            if lowest == 0:
+                lowest = var.waarde
+            elif var.waarde < lowest:
+                lowest = var.waarde
+        return lowest
 
     def _find_specific_object(self, objects: list, id: int):
         try:
@@ -51,3 +74,4 @@ class AfstandBerekenen:
 
     def _bereken_afstand(self, x1, y1, x2, y2):
         return math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
+

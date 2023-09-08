@@ -39,6 +39,7 @@ class AfstandVarDataHandler(IModelDataHandler):
         varInfo.naam = result[1]
         varInfo.objectLink = result[2]
         varInfo.doelObjectType = result[3]
+        varInfo.jaar = result[4]
 
         return varInfo
     #

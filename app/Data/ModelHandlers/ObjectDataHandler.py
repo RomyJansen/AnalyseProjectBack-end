@@ -45,6 +45,9 @@ class ObjectDataHandler(IModelDataHandler):
         objectInfo.objectType = result[2]
         objectInfo.locatieX = result[3]
         objectInfo.locatieY = result[4]
+        objectInfo.grootteX = result[5]
+        objectInfo.grootteY = result[6]
+        objectInfo.jaar = result[7]
 
         return objectInfo
 

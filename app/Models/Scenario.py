@@ -14,5 +14,6 @@ class Scenario(BaseModel):
     berekende_variabelen: List[BerekendeVar] = []
     afstands_variabelen: List[AfstandVar] = []
     gebeurtenissen: List[str] = []
+    object_gebeurtenissen: List[str] = []
     regels: List[str] = []
     objecten: List[str] = []

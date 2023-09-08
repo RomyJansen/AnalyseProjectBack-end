@@ -11,15 +11,3 @@ class BerekendeVar(Variabele):
     objectBerekening: bool
     operator: str
     results: list
-
-    # def printValues(self):
-    #     printString = "id: " + str(id)
-    #     printString += "\nname: " + naam,
-    #     printString += "\nwaarde: " + str(waarde)
-    #     printString += "\nobjectBerekening: " + str(self.objectBerekening)
-    #     if self.objectBerekening:
-    #         printString += "\nobject1Id: " + str(self.object1Id)
-    #         printString += "\nobject2Id: " + str(self.object2Id)
-    #     else:
-    #         printString += "\nvar1Id: " + str(self.var1Id)
-    #         printString += "\nvar2Id: " + str(self.var2Id)
