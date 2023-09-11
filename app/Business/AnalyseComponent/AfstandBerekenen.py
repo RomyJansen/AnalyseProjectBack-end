@@ -17,7 +17,7 @@ class AfstandBerekenen:
         objects: list = self.objectDataHandler.get_all_from_db()
         try:
             for item in varResults:
-                item.results = self.bereken_afstand_voor_item(item, objects)
+                item.results = self._bereken_afstand_voor_item(item, objects)
             return varResults
         except TypeError as e:
             raise (e, "Er zijn geen afstand variabelen in de database!")
@@ -28,13 +28,13 @@ class AfstandBerekenen:
         objects: list = self.objectDataHandler.get_all_items_from_year(jaar)
         try:
             for item in varResults:
-                item.results = self.bereken_afstand_voor_item(item, objects)
+                item.results = self._bereken_afstand_voor_item(item, objects)
             return varResults
         except TypeError as e:
             raise (e, "Er zijn geen afstand variabelen in de database!")
         # Deze errorHandling verplaatsen naar data layer!
 
-    def bereken_afstand_voor_item(self, item: AfstandVar, objects):
+    def _bereken_afstand_voor_item(self, item: AfstandVar, objects):
         results: list = []
         object: Object = self._find_specific_object(objects, item.objectLink)
         possibleObjects: list = []
