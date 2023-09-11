@@ -19,7 +19,7 @@ class TestAfstandBerekenen(TestCase):
 
     @mock.patch.object(AfstandVarDataHandler, 'get_all_from_db', return_value=[testAfstandVar])
     @mock.patch.object(ObjectDataHandler, 'get_all_from_db', return_value=testObjectList)
-    @mock.patch.object(AfstandBerekenen, 'bereken_afstand_voor_item', return_value=[testVar])
+    @mock.patch.object(AfstandBerekenen, '_bereken_afstand_voor_item', return_value=[testVar])
     def test_bereken_alle_afstanden_returns_correct_result(self, mock_get_all_from_db_afstand,
                                                            mock_get_all_from_db_object, mock_bereken_afstand_voor_item):
         self.testAfstandVar.results.append(self.testVar)
@@ -27,7 +27,7 @@ class TestAfstandBerekenen(TestCase):
 
     @mock.patch.object(AfstandVarDataHandler, 'get_all_from_db', return_value=[])
     @mock.patch.object(ObjectDataHandler, 'get_all_from_db', return_value=[])
-    @mock.patch.object(AfstandBerekenen, 'bereken_afstand_voor_item', return_value=[])
+    @mock.patch.object(AfstandBerekenen, '_bereken_afstand_voor_item', return_value=[])
     def test_bereken_alle_afstanden_raises_error_for_empty_var_list(self, mock_get_all_from_db_afstand,
                                                                     mock_get_all_from_db_object,
                                                                     mock_bereken_afstand_voor_item):
@@ -35,7 +35,7 @@ class TestAfstandBerekenen(TestCase):
 
     @mock.patch.object(AfstandVarDataHandler, 'get_all_items_from_year', return_value=[testAfstandVar])
     @mock.patch.object(ObjectDataHandler, 'get_all_items_from_year', return_value=testObjectList)
-    @mock.patch.object(AfstandBerekenen, 'bereken_afstand_voor_item', return_value=[testVar])
+    @mock.patch.object(AfstandBerekenen, '_bereken_afstand_voor_item', return_value=[testVar])
     def test_bereken_alle_afstanden_voor_jaar_returns_correct_results(self, mock_get_all_items_from_year_afstand,
                                                                       mock_get_all_items_from_year_objects,
                                                                       mock_bereken_afstand_voor_item):
@@ -44,7 +44,7 @@ class TestAfstandBerekenen(TestCase):
 
     @mock.patch.object(AfstandVarDataHandler, 'get_all_items_from_year', return_value=[])
     @mock.patch.object(ObjectDataHandler, "get_all_items_from_year", return_value=[])
-    @mock.patch.object(AfstandBerekenen, 'bereken_afstand_voor_item', return_value=[])
+    @mock.patch.object(AfstandBerekenen, '_bereken_afstand_voor_item', return_value=[])
     def test_bereken_alle_afstanden_voor_jaar_raises_error_for_empty_var_list(self,
                                                                               mock_get_all_items_from_year_objects,
                                                                               mock_get_all_items_from_year_afstandvar,
@@ -54,13 +54,13 @@ class TestAfstandBerekenen(TestCase):
     @mock.patch.object(AfstandBerekenen, '_find_specific_object', return_value=testObject)
     @mock.patch.object(AfstandBerekenen, '_bereken_afstand', return_value=0)
     def test_bereken_afstand_voor_item_returns_correct_results(self, mock__find_specific_object, mock__bereken_afstand):
-        self.assertEqual(self.sut.bereken_afstand_voor_item(self.testAfstandVar, self.testObjectList).pop().naam,
+        self.assertEqual(self.sut._bereken_afstand_voor_item(self.testAfstandVar, self.testObjectList).pop().naam,
                          self.testObject.naam)
 
     @mock.patch.object(AfstandBerekenen, '_find_specific_object', return_value=testObject)
     @mock.patch.object(AfstandBerekenen, '_bereken_afstand', return_value=0)
     def test_bereken_afstand_voor_item_returns_empty_list(self, mock__find_specific_object, mock__bereken_afstand):
-        self.assertEqual(self.sut.bereken_afstand_voor_item(self.testAfstandVar, []), [])
+        self.assertEqual(self.sut._bereken_afstand_voor_item(self.testAfstandVar, []), [])
 
     def test_find_specific_object_returns_correct_object(self):
         self.assertEqual(self.sut._find_specific_object(self.testObjectList, self.testObject.id).naam,
