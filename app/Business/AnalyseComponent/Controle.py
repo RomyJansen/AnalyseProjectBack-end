@@ -12,14 +12,12 @@ class Controle:
     _afstand_var_data_handler: IModelDataHandler
     _afstand_berekenen: AfstandBerekenen
     _regel_data_handler: IModelDataHandler
-    _regels: list
 
     def __init__(self):
         self._var_data_handler = VariabelenDataHandler()
         self._ber_var_data_handler = BerekendeVarDataHandler()
         self._afstand_var_data_handler = AfstandVarDataHandler()
         self._regel_data_handler = RegelDataHandler()
-        self._regels = self._regel_data_handler.get_all_from_db()
         self._afstand_berekenen = AfstandBerekenen()
 
     # rekening houdem met regels rondom gebeurtenissen!
@@ -27,9 +25,11 @@ class Controle:
     # def controleer_regels_voor_jaar(self, jaar:int):
 
     def controleer_alle_regels_voor_jaar(self, jaar: int):
-        for regel in self._regels:
-            regel.results.append({regel.id, self._controleer_regel(regel, jaar)})
-        return self._regels
+        regels = self._regel_data_handler.get_all_from_db()
+        for regel in regels:
+            regel.results.append({self._controleer_regel(regel, jaar)})
+            print(regel.results)
+        return regels
 
     def _get_variabele_waarde_voor_jaar(self, varId: int, jaar):
         varKoppeling = self._var_data_handler.get_koppeling_from_id(varId)

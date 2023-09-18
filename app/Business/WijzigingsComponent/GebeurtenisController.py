@@ -14,7 +14,7 @@ class GebeurtenisController():
 
     def add_gebeurtenis(self, gebeurtenis: Gebeurtenis):
         self.gebeurtenis_data_handler.add_gebeurtenis_to_db(gebeurtenis)
-        resultaten = self.analyse_core.analyse_uitvoeren()
+        resultaten = self.analyse_core.analyse_uitvoeren(gebeurtenis.jaar)
 
         return resultaten
 
