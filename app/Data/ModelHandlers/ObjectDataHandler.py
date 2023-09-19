@@ -10,7 +10,7 @@ class ObjectDataHandler(IModelDataHandler):
         self._data_handler = DataHandler()
 
     def get_all_items_from_year(self, jaar: int):
-        query = "SELECT * FROM objecten WHERE (id, jaar) IN (SELECT id, MAX(jaar) as jaar FROM objecten WHERE jaar < %s group by id)"
+        query = "SELECT * FROM objecten WHERE (id, jaar) IN (SELECT id, MAX(jaar) as jaar FROM objecten WHERE jaar <= %s group by id)"
         results = self._data_handler.get_items_from_db(query, (jaar,))
         obj_list = []
         for row in results:

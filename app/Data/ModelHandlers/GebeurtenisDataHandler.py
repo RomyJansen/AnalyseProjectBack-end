@@ -47,12 +47,17 @@ class GebeurtenisDataHandler(IModelDataHandler):
         self._data_handler.add_item_to_db(query,
                                           (gebeurtenis.id, gebeurtenis.naam, gebeurtenis.jaar, gebeurtenis.waarde))
 
+    def add_object_gebeurtenis_to_db(self, gebeurtenis: ObjectGebeurtenis):
+            query = "INSERT INTO objectgebeurtenissen (id, naam, jaar, locatieX, locatieY) VALUE (%s, %s, %s , %s, %s)"
+            self._data_handler.add_item_to_db(query,
+                                              (gebeurtenis.id, gebeurtenis.naam, gebeurtenis.jaar, gebeurtenis.locatieX, gebeurtenis.locatieY))
+
     def get_object_gebeurtenissen(self):
         query = "SELECT * FROM objectGebeurtenissen"
         results = self._data_handler.get_items_from_db(query, ())
         gebeurtenissen = []
         for result in results:
-            gebeurtenissen.append(self._put_result_into_object(result))
+            gebeurtenissen.append(self._put_result_into_objectGebeurtenis(result))
 
         return gebeurtenissen
 

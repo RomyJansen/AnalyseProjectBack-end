@@ -3,7 +3,7 @@ from fastapi import APIRouter, HTTPException
 from starlette.status import HTTP_400_BAD_REQUEST
 
 from app.Data.ModelHandlers.GebeurtenisDataHandler import GebeurtenisDataHandler
-from app.Models.Gebeurtenis import Gebeurtenis
+from app.Models.Gebeurtenis import Gebeurtenis, ObjectGebeurtenis
 from app.Business.WijzigingsComponent.GebeurtenisController import GebeurtenisController
 
 gebeurtenissen_router: APIRouter = APIRouter(
@@ -27,6 +27,18 @@ def get_all_object_gebeurtenissen():
 def post_gebeurtenis(gebeurtenis: Gebeurtenis):
     try:
         results = gebeurtenis_controller.add_gebeurtenis(gebeurtenis)
+        return results
+    except mysql.connector.Error as e:
+        raise HTTPException(
+            status_code=HTTP_400_BAD_REQUEST,
+            detail="De gebeurtenis die je probeert toe te voegen bevat niet geoorloofde waardes.",
+        )
+
+
+@gebeurtenissen_router.post("/object/toevoegen", status_code=201)
+def post_gebeurtenis(gebeurtenis: ObjectGebeurtenis):
+    try:
+        results = gebeurtenis_controller.add_Object_gebeurtenis(gebeurtenis)
         return results
     except mysql.connector.Error as e:
         raise HTTPException(

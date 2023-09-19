@@ -2,6 +2,7 @@ from app.Business.AnalyseComponent.AfstandBerekenen import AfstandBerekenen
 from app.Business.AnalyseComponent.BerVarBerekenen import BerVarBerekenen
 from app.Business.AnalyseComponent.Controle import Controle
 from app.Data.ModelHandlers.BerekendeVarDataHandler import BerekendeVarDataHandler
+from app.Data.ModelHandlers.ObjectDataHandler import ObjectDataHandler
 from app.Data.ModelHandlers.ScenarioDataHandler import ScenarioDataHandler
 
 from fastapi import APIRouter
@@ -15,6 +16,7 @@ scenario_data_handler: ScenarioDataHandler = ScenarioDataHandler()
 controle: Controle = Controle()
 afstandBerekenen = AfstandBerekenen()
 gebeurtenis_controller = GebeurtenisController()
+object_data_handler = ObjectDataHandler()
 
 
 @variabelen_router.get('/bv/{id}')
@@ -45,3 +47,7 @@ def get_alle_afstanden():
 @variabelen_router.get("/afstanden/jaar")
 def get_alle_afstanden_voor_jaar(jaar: int):
     return afstandBerekenen.bereken_alle_afstanden_voor_jaar(jaar)
+
+@variabelen_router.get("/objecten/jaar")
+def get_alle_objecten_voor_jaar(jaar: int):
+    return object_data_handler.get_all_items_from_year(jaar)

@@ -1,7 +1,7 @@
 from app.Business.AnalyseComponent.AnalyseCore import AnalyseCore
 from app.Business.IModelDataHandler import IModelDataHandler
 from app.Data.ModelHandlers.GebeurtenisDataHandler import GebeurtenisDataHandler
-from app.Models.Gebeurtenis import Gebeurtenis
+from app.Models.Gebeurtenis import Gebeurtenis, ObjectGebeurtenis
 
 
 class GebeurtenisController():
@@ -18,3 +18,8 @@ class GebeurtenisController():
 
         return resultaten
 
+    def add_Object_gebeurtenis(self, gebeurtenis: ObjectGebeurtenis):
+        self.gebeurtenis_data_handler.add_object_gebeurtenis_to_db(gebeurtenis)
+        resultaten = self.analyse_core.analyse_uitvoeren(gebeurtenis.jaar)
+
+        return resultaten
